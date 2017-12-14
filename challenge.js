@@ -17,10 +17,11 @@ counterIncrement = function() {
   document.getElementById('counter').innerHTML = counterText // then reset the text
 }
 
-window.onload = setInterval(counterIncrement, 1000) // start running function on window load
+let startCount = setInterval(counterIncrement, 1000)
+window.onload = startCount // start running function on window load
 
+const minusButton = document.getElementById('-')
 userDecrement = function() {
-  const minusButton = document.getElementById('-')
   minusButton.addEventListener('click', function(){ // can take optional 'event' argument
     counterText -= 1
   })
@@ -28,8 +29,8 @@ userDecrement = function() {
 
 userDecrement() // do this on load
 
+const plusButton = document.getElementById('+')
 userIncrement = function() {
-  const plusButton = document.getElementById('+')
   plusButton.addEventListener('click', function(){ // can take optional 'event' argument
     counterText += 1
   })
@@ -38,7 +39,6 @@ userIncrement = function() {
 userIncrement() // do this on load
 
 const heartButton = document.getElementById('<3')
-
 userLike = function() {
   let likesObj = {}
   let likesUL = document.getElementsByClassName('likes')
@@ -48,8 +48,6 @@ userLike = function() {
       let bullet = document.getElementById(counterText)
       bullet.innerHTML = `${counterText} has been liked ${likesObj[counterText]} times`
       console.log(likesUL[0], bullet)
-      debugger
-
     } else {
       likesObj[counterText] = 1
       let bullet = document.createElement('li')
@@ -60,8 +58,25 @@ userLike = function() {
   })
 }
 
-pause = function () {
-  
-}
-
 userLike()
+
+submitButton = document.getElementById('submit')
+pauseButton = document.getElementById('pause')
+
+pauseButton.addEventListener('click', function() {
+  if (pauseButton.innerText === 'pause') {
+    pauseButton.innerText = 'resume'
+    plusButton.disabled = true
+    minusButton.disabled = true
+    heartButton.disabled = true
+    submitButton.disabled = true
+    clearInterval(startCount)
+  } else if (pauseButton.innerText === 'resume') {
+    setInterval(counterIncrement, 1000) // EXPLORE THIS ***************
+    pauseButton.innerText = 'pause'
+    plusButton.disabled = false
+    minusButton.disabled = false
+    heartButton.disabled = false
+    submitButton.disabled = false
+  }
+})
