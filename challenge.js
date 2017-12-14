@@ -40,18 +40,28 @@ userIncrement() // do this on load
 const heartButton = document.getElementById('<3')
 
 userLike = function() {
+  let likesObj = {}
   let likesUL = document.getElementsByClassName('likes')
-  heartButton.addEventListener('click', function(){
-    userLikes.push(counterText)
+  heartButton.addEventListener('click', function (){
+    if (likesObj[counterText]) {
+      likesObj[counterText] += 1
+      let bullet = document.getElementById(counterText)
+      bullet.innerHTML = `${counterText} has been liked ${likesObj[counterText]} times`
+      console.log(likesUL[0], bullet)
+      debugger
+
+    } else {
+      likesObj[counterText] = 1
+      let bullet = document.createElement('li')
+      bullet.setAttribute('id', counterText)
+      bullet.innerHTML = `${counterText} has been liked ${likesObj[counterText]} times`
+      likesUL[0].append(bullet)
+    }
   })
 }
 
-displayLikes = function() {
-  let bullet = document.createElement('li')
-  bullet.innerHTML = like
-  likesUL[0].append(bullet)
-  // debugger
+pause = function () {
+  
 }
 
-displayLikes()
 userLike()
