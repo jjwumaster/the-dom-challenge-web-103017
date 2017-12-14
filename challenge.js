@@ -80,3 +80,12 @@ pauseButton.addEventListener('click', function() {
     submitButton.disabled = false
   }
 })
+
+form = document.getElementById("comment-form")
+form.addEventListener('submit', function(e) {
+  e.preventDefault()
+  let input = document.getElementsByTagName('input')
+  let content = input[0].value
+  let commentDiv = document.getElementById("list")
+  commentDiv.innerHTML = commentDiv.innerHTML + `<p>${content}<p>`
+})
