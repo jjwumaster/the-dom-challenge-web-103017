@@ -72,7 +72,7 @@ pauseButton.addEventListener('click', function() {
     submitButton.disabled = true
     clearInterval(startCount)
   } else if (pauseButton.innerText === 'resume') {
-    setInterval(counterIncrement, 1000) // EXPLORE THIS ***************
+    startCount = setInterval(counterIncrement, 1000) // EXPLORE THIS ***************
     pauseButton.innerText = 'pause'
     plusButton.disabled = false
     minusButton.disabled = false
